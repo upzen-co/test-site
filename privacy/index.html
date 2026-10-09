@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Privacy — upzen</title>
+  <meta name="description" content="upzen's privacy policy. Our apps collect nothing. Your data stays on your device." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1a1a1a" />
+
+  <link rel="preload" href="/assets/fonts/inter-roman-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/fonts/inter.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:        #4cae50;
+      --green-dim:    rgba(76,174,80,0.72);
+      --dark:         #1a1a1a;
+      --dark-border:  rgba(255,255,255,0.07);
+      --white:        #ffffff;
+      --white-dim:    rgba(255,255,255,0.55);
+      --white-faint:  rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; width: 100%; overflow-x: hidden; overflow-x: clip; }
+    body { overflow-x: clip; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.45;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative; z-index: 1;
+      width: 100%;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,26,26,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--dark-border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .nav-logo svg { width: 34px; height: 34px; display: block; }
+
+    .nav-wordmark {
+      font-size: 15px; font-weight: 600; letter-spacing: -0.02em;
+      color: var(--white);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .nav-wordmark .wm-sep {
+      color: var(--white-dim); opacity: 0.45;
+      font-weight: 300; font-size: 18px; line-height: 1;
+    }
+    .nav-wordmark .wm-product {
+      font-weight: 400; color: var(--white-dim); font-size: 14px;
+    }
+
+    .nav-links {
+      margin-left: auto;
+      display: flex; align-items: center;
+      gap: 2px; list-style: none;
+    }
+    .nav-links a {
+      display: inline-flex; align-items: center;
+      color: var(--white-dim);
+      text-decoration: none;
+      font-size: 0.875rem; font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--white); background: var(--white-faint); }
+    .nav-links a.active { color: var(--white); }
+    .nav-links a svg { width: 15px; height: 15px; fill: currentColor; display: block; }
+
+    /* ── Hamburger ── */
+    .nav-hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      padding: 8px; border-radius: 8px;
+      color: var(--white-dim);
+      transition: color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-hamburger:hover { color: var(--white); background: var(--white-faint); }
+    .nav-hamburger svg { display: block; width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+    .nav-hamburger .icon-close { display: none; }
+    .nav-hamburger.open .icon-open  { display: none; }
+    .nav-hamburger.open .icon-close { display: block; }
+
+    /* ── Mobile menu ── */
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(22,22,22,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--dark-border);
+      z-index: 99;
+      padding: 0;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .mobile-menu.open { max-height: 320px; }
+    .mobile-menu-inner {
+      padding: 12px 20px 20px;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .mobile-menu-inner a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 1rem; font-weight: 500;
+      padding: 12px 14px;
+      border-radius: 10px;
+      display: flex; align-items: center; gap: 12px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mobile-menu-inner a svg {
+      width: 18px; height: 18px; flex-shrink: 0;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .mobile-menu-inner a.m-github svg { fill: currentColor; stroke: none; }
+    .mobile-menu-inner a:hover { background: var(--white-faint); }
+
+    /* ── Content ── */
+    main { flex: 1; padding: 72px 0 96px; }
+
+    .policy { max-width: 640px; }
+
+    h1 {
+      font-size: clamp(1.9rem, 5vw, 2.6rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 12px;
+    }
+
+    .updated {
+      font-size: 0.85rem; color: var(--white-dim);
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 1.15rem; font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 40px 0 12px;
+    }
+
+    .policy p {
+      font-size: 0.95rem; color: var(--white-dim);
+      line-height: 1.7; margin-bottom: 14px;
+    }
+
+    .policy p strong { color: var(--white); font-weight: 600; }
+
+    .policy a { color: var(--green); text-decoration: none; }
+    .policy a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid var(--dark-border); padding: 36px 0; }
+
+    .footer-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+    .footer-left { display: flex; align-items: center; gap: 12px; }
+    .footer-mark { display: block; width: 28px; height: 28px; flex-shrink: 0; }
+    .footer-copy { font-size: 0.8rem; color: var(--white-dim); }
+
+    .footer-links {
+      display: flex; align-items: center; gap: 4px; list-style: none;
+    }
+    .footer-links a {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: var(--white-dim); text-decoration: none;
+      font-size: 0.85rem; font-weight: 500;
+      padding: 8px 12px; border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); background: var(--white-faint); }
+    .footer-links svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; align-items: center; justify-content: center; }
+      .mobile-menu { display: block; }
+    }
+    @media (max-width: 380px) {
+      .nav-wordmark .wm-sep, .nav-wordmark .wm-product { display: none; }
+    }
+    @media (max-width: 560px) {
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "06f5f6b1e0284eb387e32396f834f838"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo" aria-label="upzen home">
+          <svg viewBox="0 0 79.67 79.67" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#4cae50" d="m56.57,28.71h-22.16c-3.1,0-5.61-2.51-5.61-5.61s2.51-5.61,5.61-5.61h22.16c3.1,0,5.61,2.51,5.61,5.61s-2.51,5.61-5.61,5.61Z"/>
+            <path fill="#4cae50" d="m45.26,62.18h-22.16c-3.1,0-5.61-2.51-5.61-5.61s2.51-5.61,5.61-5.61h22.16c3.1,0,5.61,2.51,5.61,5.61s-2.51,5.61-5.61,5.61Z"/>
+            <path fill="#4cae50" d="m23.1,62.18c-1.44,0-2.87-.55-3.97-1.64-2.19-2.19-2.19-5.74,0-7.93L52.6,19.14c2.19-2.19,5.74-2.19,7.93,0,2.19,2.19,2.19,5.74,0,7.93L27.07,60.53c-1.1,1.1-2.53,1.64-3.97,1.64Z"/>
+            <path fill="#4cae50" d="m56.57,50.87c-3.1,0-5.61-2.51-5.61-5.61v-22.16c0-3.1,2.51-5.61,5.61-5.61s5.61,2.51,5.61,5.61v22.16c0,3.1-2.51,5.61-5.61,5.61Z"/>
+          </svg>
+          <span class="nav-wordmark">upzen<span class="wm-sep">/</span><span class="wm-product">privacy</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/charts/">Charts</a></li>
+          <li><a href="/up-bank-wealth-chart/">Wealth</a></li>
+          <li>
+            <a href="https://github.com/upzen-co" target="_blank" rel="noopener" aria-label="upzen on GitHub">
+              <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
+            </a>
+          </li>
+        </ul>
+
+        <button class="nav-hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+          <svg class="icon-open" viewBox="0 0 24 24">
+            <line x1="3" y1="6"  x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          <svg class="icon-close" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6"  y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Mobile menu ── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <a href="/">
+        <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a href="/charts/">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Charts
+      </a>
+      <a href="/up-bank-wealth-chart/">
+        <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        Wealth
+      </a>
+      <a href="https://github.com/upzen-co" class="m-github" target="_blank" rel="noopener">
+        <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Policy ── -->
+  <main>
+    <div class="container">
+      <article class="policy">
+        <h1>Your data is yours. We don't want it.</h1>
+        <p class="updated">Last updated 4 October 2026</p>
+
+        <p>This policy covers all upzen apps and the upzen.co website. The short version: <strong>our apps collect nothing</strong>, the website at most counts anonymous visits, and the only personal detail we ever hold is an email address you choose to give us by joining our waitlist.</p>
+
+        <h2>Apps</h2>
+        <p>upzen apps do not collect, store, transmit, or process any of your data. There are no accounts, no sign-ups, no servers, no analytics, no advertising, and no third-party SDKs that track you. Everything you do in an upzen app stays on your device (and in your own iCloud, if you enable syncing — which only you and Apple can access, not us).</p>
+        <p>Because we collect nothing, there is nothing for us to sell, share, lose, or leak.</p>
+
+        <h2>Website</h2>
+        <p>upzen.co uses <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare Web Analytics</a> to understand overall traffic — things like total page views, rough visitor counts, referring sites, and device types. This involves no cookies, no personal information, no fingerprinting, and no tracking of you across other sites. That's the full extent of it.</p>
+        <p>The site is hosted on GitHub Pages, which may keep standard server logs (such as IP addresses) to operate the service; see <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>.</p>
+
+        <h2>Waitlist &amp; email</h2>
+        <p>If you enter your email address into a waitlist or sign-up form on upzen.co, we use it for one purpose: to email you occasional updates about upzen — most importantly, to let you know when a new tool launches. We ask for your email only when you choose to give it, and we will never sell, rent, or share your address.</p>
+        <p>Waitlist emails are stored and sent through <a href="https://kit.com" target="_blank" rel="noopener">Kit</a> (formerly ConvertKit), our email provider, whose servers may be located outside Australia. By joining, you consent to your email being handled by Kit for this purpose; see <a href="https://kit.com/privacy" target="_blank" rel="noopener">Kit's privacy policy</a>. Every email we send includes a one-click unsubscribe link, and you can ask us to delete your address at any time.</p>
+
+        <h2>Changes</h2>
+        <p>If any of this ever changes, we'll update this page and the date above.</p>
+
+        <h2>Contact</h2>
+        <p>Questions? Reach out via <a href="https://github.com/upzen-co" target="_blank" rel="noopener">GitHub</a>.</p>
+      </article>
+    </div>
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <svg class="footer-mark" viewBox="0 0 79.67 79.67" xmlns="http://www.w3.org/2000/svg" aria-label="upzen">
+            <circle fill="#333" cx="39.83" cy="39.83" r="39.83"/>
+            <path fill="rgba(76,174,80,0.72)" d="M56.57,28.71h-22.16c-3.1,0-5.61-2.51-5.61-5.61s2.51-5.61,5.61-5.61h22.16c3.1,0,5.61,2.51,5.61,5.61s-2.51,5.61-5.61,5.61Z"/>
+            <path fill="rgba(76,174,80,0.72)" d="M45.26,62.18H23.1c-3.1,0-5.61-2.51-5.61-5.61s2.51-5.61,5.61-5.61h22.16c3.1,0,5.61,2.51,5.61,5.61s-2.51,5.61-5.61,5.61Z"/>
+            <path fill="rgba(76,174,80,0.72)" d="M23.1,62.18c-1.44,0-2.87-.55-3.97-1.64-2.19-2.19-2.19-5.74,0-7.93L52.6,19.14c2.19-2.19,5.74-2.19,7.93,0,2.19,2.19,2.19,5.74,0,7.93L27.07,60.53c-1.1,1.1-2.53,1.64-3.97,1.64Z"/>
+            <path fill="rgba(76,174,80,0.72)" d="M56.57,50.87c-3.1,0-5.61-2.51-5.61-5.61V23.1c0-3.1,2.51-5.61,5.61-5.61s5.61,2.51,5.61,5.61v22.16c0,3.1-2.51,5.61-5.61,5.61Z"/>
+          </svg>
+          <span class="footer-copy">© upzen</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="/privacy">Privacy</a></li>
+          <li>
+            <a href="https://github.com/upzen-co" target="_blank" rel="noopener" aria-label="upzen on GitHub">
+              <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z"/></svg>
+              GitHub
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav  = document.querySelector('nav');
+    const btn  = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+      menu.setAttribute('aria-hidden', !open);
+    });
+    function closeMenu() {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', false);
+      menu.setAttribute('aria-hidden', true);
+    }
+    document.addEventListener('click', e => {
+      if (!nav.contains(e.target) && !menu.contains(e.target)) closeMenu();
+    });
+  </script>
+
+</body>
+</html>
