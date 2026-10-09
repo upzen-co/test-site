@@ -97,28 +97,40 @@ img { max-width: 100%; }
 .home-hero-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   padding: 40px var(--gutter) 80px; gap: 26px; position: relative; z-index: 2; }
 .home-hero-main .lede { max-width: 640px; }
-.home-floats .float { position: absolute; z-index: 1; }
-.float-hrv { left: 6%; top: 150px; width: 252px; transform: rotate(-7deg); }
-.float-wealth { right: 6%; top: 128px; width: 268px; transform: rotate(6deg); }
-.float-happy { left: 10%; bottom: 70px; width: 236px; transform: rotate(5deg); }
-.float-wisdom { right: 9%; bottom: 84px; width: 244px; transform: rotate(-5deg); }
-/* Below desktop the cards can't orbit the headline without covering it — they become a fanned row under the form. */
+/* The cards keep their exact desktop design at every size: they just scale (--s) and, below desktop,
+   move to the four corners so they still frame the headline instead of dropping into a row. */
+.home-floats .float { position: absolute; z-index: 1; --s: 1; transform: rotate(var(--r)) scale(var(--s)); }
+.float-hrv { left: 6%; top: 150px; width: 252px; --r: -7deg; transform-origin: top left; }
+.float-wealth { right: 6%; top: 128px; width: 268px; --r: 6deg; transform-origin: top right; }
+.float-happy { left: 10%; bottom: 70px; width: 236px; --r: 5deg; transform-origin: bottom left; }
+.float-wisdom { right: 9%; bottom: 84px; width: 244px; --r: -5deg; transform-origin: bottom right; }
+/* Tablet: same orbit as desktop, cards scaled so they fit beside the (smaller) headline. */
 @media (max-width: 1180px) {
   .home-hero { min-height: 0; }
-  .home-hero-main { padding-bottom: 32px; }
-  .home-floats { position: relative; display: flex; justify-content: center; flex-wrap: wrap; gap: 18px; padding: 8px var(--gutter) 64px; }
-  .home-floats .float { position: relative; inset: auto; width: 230px; }
+  .home-hero-main { padding-top: 56px; padding-bottom: 120px; }
+  .home-floats .float { --s: 0.72; }
+  .float-hrv { left: 2%; top: 150px; }
+  .float-wealth { right: 2%; top: 136px; }
+  .float-happy { left: 2.5%; bottom: 48px; }
+  .float-wisdom { right: 2.5%; bottom: 58px; }
   .shelf-section { padding-top: 72px; }
 }
+@media (max-width: 900px) {
+  .home-hero-main { padding-bottom: 150px; }
+  .home-floats .float { --s: 0.6; }
+  .float-hrv { left: 1.5%; top: 160px; }
+  .float-wealth { right: 1.5%; top: 150px; }
+  .float-happy { bottom: 20px; }
+  .float-wisdom { bottom: 28px; }
+}
+/* Phone: no room beside the headline, so the cards frame it from above and below instead. */
 @media (max-width: 700px) {
-  .home-floats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding-bottom: 16px; }
-  .home-floats .float { width: auto; }
-  .float-hrv, .float-wealth, .float-happy, .float-wisdom { transform: none; }
-  .home-floats .mcard { padding: 12px 12px 10px; border-radius: 18px; }
-  .home-floats .mcard-head { font-size: 12px; }
-  .home-floats .mcard-val { font-size: 24px; }
-  .home-floats .mcard-sub { font-size: 11px; }
-  .home-floats .mcard-avg { font-size: 15px; }
+  .home-hero-main { padding-top: 130px; padding-bottom: 125px; }
+  .home-floats .float { --s: 0.5; }
+  .float-hrv { left: 3%; top: 74px; }
+  .float-wealth { right: 1%; top: 86px; }
+  .float-happy { left: 4%; bottom: 18px; }
+  .float-wisdom { right: 3%; bottom: 26px; }
 }
 
 /* ── Product shelf ── */
@@ -188,8 +200,10 @@ img { max-width: 100%; }
 /* ── Charts hero ── */
 .charts-hero { position: relative; min-height: min(900px, 100svh); display: flex; flex-direction: column; overflow: hidden; background: var(--bg-deep); }
 .charts-hero-main { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
-  padding: 64px var(--gutter) 0 max(var(--gutter), 6%); max-width: 880px; }
+  padding: 64px var(--gutter) 0 max(var(--gutter), 6%); }
 .charts-hero-main .h1 { font-size: clamp(44px, 6.4vw, 80px); line-height: 0.94; letter-spacing: -0.04em; text-wrap: initial; }
+/* Each headline sentence stays on one line once there is room (the column no longer caps the width). */
+@media (min-width: 901px) { .charts-hero-main .h1 .line { white-space: nowrap; } }
 .charts-hero-main .lede { max-width: 470px; text-wrap: pretty; }
 .charts-hero-main .waitlist { align-items: flex-start; }
 .hero-graph { position: absolute; left: 0; right: 0; bottom: 0; height: 470px; z-index: 0; }
