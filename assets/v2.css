@@ -212,6 +212,7 @@ img { max-width: 100%; }
 .footer nav { display: flex; gap: 24px; }
 .footer a { color: var(--ink-2); text-decoration: none; }
 .footer a:hover { color: var(--ink); }
+.footer-note { flex-basis: 100%; margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-3); max-width: 70ch; }
 
 /* ── Charts hero ── */
 .charts-hero { position: relative; padding-top: 70px; min-height: min(900px, 100svh); display: flex; flex-direction: column; overflow: hidden; background: var(--bg-deep); }
