@@ -17,7 +17,8 @@
   --gutter: clamp(16px, 4vw, 28px);
   color-scheme: dark;
 }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -31,8 +32,12 @@ img { max-width: 100%; }
 .wrap { max-width: 1160px; margin: 0 auto; padding: 0 var(--gutter); }
 
 /* ── Nav ── */
-.nav { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between;
-  gap: 16px; padding: 18px var(--gutter); }
+/* Fixed so the one call to action stays in reach down long pages; it frosts over once the page scrolls (v2.js adds .stuck).
+   Heroes reserve its 70px with padding-top, so the hero layout below is measured as if the nav were still in flow. */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 18px var(--gutter); transition: background-color .25s ease, box-shadow .25s ease; }
+.nav.stuck { background: rgba(16,16,17,0.72); backdrop-filter: blur(20px) saturate(1.5); -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow: 0 1px 0 var(--line); }
 .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: 15px;
   letter-spacing: -0.02em; }
 .nav-logo svg { width: 34px; height: 34px; display: block; }
@@ -41,7 +46,9 @@ img { max-width: 100%; }
 .nav-links { display: flex; align-items: center; gap: 24px; font-size: 14px; }
 .nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; }
 .nav-links a:hover { color: var(--ink); }
-.nav-links .nav-cta { color: var(--ink); padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,0.08); font-weight: 500; }
+.nav-links .nav-cta { color: var(--ink); padding: 9px 16px; border-radius: 999px; background: rgba(255,255,255,0.08); font-weight: 500;
+  display: inline-flex; align-items: center; gap: 8px; }
+.nav-soon { background: var(--green); color: #fff; font-size: 11px; font-weight: 600; padding: 3px 7px; border-radius: 99px; line-height: 1; }
 @media (max-width: 640px) { .nav-links .hide-sm { display: none; } .nav-links { gap: 16px; } }
 
 /* ── Headlines ── */
@@ -70,6 +77,7 @@ img { max-width: 100%; }
 .waitlist-btn { flex: none; border: 0; font: inherit; font-weight: 600; font-size: 15px; background: var(--ink); color: #141414;
   padding: 12px 20px; border-radius: 999px; cursor: pointer; min-height: 44px; }
 .waitlist-btn:disabled { opacity: 0.6; cursor: default; }
+.waitlist-note { margin: 0; font-size: 13px; color: var(--ink-3); }
 .waitlist-msg { min-height: 0; font-size: 14px; color: var(--ink-2); margin: 0; }
 .waitlist-msg:empty { display: none; }
 .waitlist-msg.success { color: #8fd492; }
@@ -88,19 +96,25 @@ img { max-width: 100%; }
 .mcard-avg { text-align: right; font-size: 20px; color: #a1a1a6; font-weight: 600; }
 .mcard-avg small { display: block; font-size: 12px; color: #6e6e73; font-weight: 400; }
 .mcard svg.spark { width: 100%; display: block; margin-top: 8px; }
+.mcard-rows { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+.mcard-row { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; padding: 6px 10px; border-radius: 10px;
+  background: rgba(255,255,255,0.05); color: #d1d1d6; }
+.mcard-row b { font-weight: 700; white-space: nowrap; }
 /* The screenshot's own rounded card sits on black; clip to its corner (~8% of width) so no black shows at any size. */
 .shot-card { align-self: start; border-radius: 8.4% / 9.8%; overflow: hidden; background: #1c1c1e; box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06); }
 .shot-card img { display: block; width: 100%; height: auto; }
 
 /* ── Home hero ── */
-.home-hero { position: relative; min-height: min(900px, 100svh); display: flex; flex-direction: column; overflow: hidden;
+.home-hero { position: relative; padding-top: 70px; min-height: min(900px, 100svh); display: flex; flex-direction: column; overflow: hidden;
   background: radial-gradient(ellipse 60% 50% at 50% 46%, rgba(76,174,80,0.10), rgba(20,20,20,0) 70%), var(--bg); }
 .home-hero-main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
   padding: 40px var(--gutter) 80px; gap: 26px; position: relative; z-index: 2; }
 .home-hero-main .lede { max-width: 640px; }
 /* The cards keep their exact desktop design at every size: they just scale (--s) and, below desktop,
    move to the four corners so they still frame the headline instead of dropping into a row. */
-.home-floats .float { position: absolute; z-index: 1; --s: 1; transform: rotate(var(--r)) scale(var(--s)); }
+.home-floats .float { position: absolute; z-index: 1; --s: 1; --lift: 0px; transform: translateY(var(--lift)) rotate(var(--r)) scale(var(--s)); }
+.home-floats a.float { text-decoration: none; transition: transform .25s ease; }
+.home-floats a.float:hover { --lift: -6px; }
 .float-hrv { left: 6%; top: 150px; width: 252px; --r: -7deg; transform-origin: top left; }
 .float-wealth { right: 6%; top: 128px; width: 268px; --r: 6deg; transform-origin: top right; }
 .float-happy { left: 10%; bottom: 70px; width: 236px; --r: 5deg; transform-origin: bottom left; }
@@ -137,10 +151,6 @@ img { max-width: 100%; }
 /* ── Product shelf ── */
 .shelf-section { padding-top: 120px; }
 .shelf-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
-.chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.chip { border: 0; cursor: pointer; font: inherit; font-size: 14px; font-weight: 500; padding: 10px 16px; min-height: 44px; border-radius: 99px;
-  display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); color: var(--ink); }
-.chip[aria-pressed="true"] { background: var(--ink); color: #141414; font-weight: 600; }
 .dot { width: 8px; height: 8px; border-radius: 99px; flex: none; }
 .area { display: flex; flex-direction: column; gap: 28px; margin-bottom: 96px; }
 @media (max-width: 560px) { .area { margin-bottom: 64px; gap: 22px; } }
@@ -158,6 +168,8 @@ img { max-width: 100%; }
 .pcard-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 .soon.soon-full { grid-column: 1 / -1; }
 .pcard-name { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; margin-top: 4px; }
+.pcard-proof { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+.pcard-proof span { color: #f5b13d; }
 .pcard-desc { font-size: 15px; color: var(--ink-2); line-height: 1.45; }
 .pcard-cta { margin-top: auto; padding-top: 14px; font-size: 15px; font-weight: 600; }
 .span-2 { grid-column: span 2; }
@@ -193,6 +205,7 @@ img { max-width: 100%; }
 /* ── About strip + footer ── */
 .about { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; align-items: center; padding: 72px 0 24px;
   border-top: 1px solid var(--line); margin-top: 32px; }
+.about-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 22px; min-width: 0; }
 .about p { margin: 0; font-size: 18px; line-height: 1.55; color: var(--ink-2); }
 @media (max-width: 800px) { .about { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-top: 56px; } }
 .footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 56px 0 40px; font-size: 14px; color: var(--ink-3); }
@@ -201,7 +214,7 @@ img { max-width: 100%; }
 .footer a:hover { color: var(--ink); }
 
 /* ── Charts hero ── */
-.charts-hero { position: relative; min-height: min(900px, 100svh); display: flex; flex-direction: column; overflow: hidden; background: var(--bg-deep); }
+.charts-hero { position: relative; padding-top: 70px; min-height: min(900px, 100svh); display: flex; flex-direction: column; overflow: hidden; background: var(--bg-deep); }
 .charts-hero-main { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
   padding: 64px var(--gutter) 0 max(var(--gutter), 6%); }
 .charts-hero-main .h1 { font-size: clamp(44px, 6.4vw, 80px); line-height: 0.94; letter-spacing: -0.04em; text-wrap: initial; }
@@ -288,3 +301,59 @@ img { max-width: 100%; }
 .closing .big { margin: 0; font-size: clamp(44px, 8vw, 96px); font-weight: 500; line-height: 0.92; letter-spacing: -0.045em; text-wrap: balance; }
 .closing .waitlist { align-items: center; }
 @media (max-width: 560px) { .closing { padding-top: 96px; } }
+
+/* ── Motion (Charts) ──
+   On load the HRV line draws left to right, then the spike lands and the alert drops in: the product's promise in three seconds.
+   Below the fold, [data-reveal] blocks rise in as they scroll into view (v2.js adds .anim to <html>, then .in per block),
+   so with no JS or reduced motion everything simply shows. */
+@media (prefers-reduced-motion: no-preference) {
+  .charts-hero-main > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  .charts-hero-main > :nth-child(2) { animation-delay: .12s; }
+  .charts-hero-main > :nth-child(3) { animation-delay: .24s; }
+  /* Stops at 94%: the line ends at x=1340 of 1440, so the reveal finishes as it reaches the spike. */
+  .hero-graph svg.line-data { animation: draw 2.4s cubic-bezier(.55,0,.25,1) .3s both; }
+  .hero-graph .avg, .hero-graph .dates { animation: fade .8s ease .3s both; }
+  .hero-graph .spike { animation: pop .55s cubic-bezier(.3,1.7,.5,1) 2.55s both; }
+  .hero-graph .spike::after { content: ""; position: absolute; inset: 0; border-radius: inherit; animation: ring 2.4s ease-out 3.1s infinite; }
+  .hero-graph .hero-alert { animation: drop .7s cubic-bezier(.2,1.25,.4,1) 2.85s both; }
+
+  .anim [data-reveal] { opacity: 0; transform: translateY(22px);
+    transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); transition-delay: calc(var(--i, 0) * 110ms); }
+  .anim [data-reveal].in { opacity: 1; transform: none; }
+  /* The phone's alert lands after the phone settles, like the real banner. */
+  .anim .phone .banner { opacity: 0; transform: translateY(-45%) scale(.92);
+    transition: opacity .5s ease .7s, transform .75s cubic-bezier(.2,1.25,.4,1) .7s; }
+  .anim .phone.in .banner { opacity: 1; transform: none; }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 6% 0 0); } }
+@keyframes pop { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
+@keyframes ring { from { box-shadow: 0 0 0 0 rgba(52,199,89,0.55); } to { box-shadow: 0 0 0 26px rgba(52,199,89,0); } }
+@keyframes drop { from { opacity: 0; transform: translateY(-28px) scale(.95); } to { opacity: 1; transform: none; } }
+
+/* ── Charts FAQ: one grouped inset list, like Settings; each row opens in place. ── */
+.faq { padding: 140px 0 0; display: flex; flex-direction: column; gap: 32px; max-width: 760px; margin: 0 auto; }
+.faq-list { background: var(--card); border-radius: 12px; overflow: hidden; }
+.faq details + details { border-top: 1px solid var(--line); margin-left: 20px; }
+.faq details + details summary { padding-left: 0; }
+.faq details + details p { padding-left: 0; }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 20px; font-size: 17px; font-weight: 600; min-height: 44px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; flex: none; width: 8px; height: 8px; border-right: 2px solid var(--ink-3); border-bottom: 2px solid var(--ink-3);
+  transform: rotate(45deg) translateY(-2px); transition: transform .2s ease; }
+.faq details[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+.faq summary:focus-visible { outline: 2px solid var(--green); outline-offset: -2px; border-radius: 12px; }
+.faq details p { margin: 0; padding: 0 20px 18px; font-size: 15px; line-height: 1.5; color: var(--ink-2); max-width: 60ch; }
+@media (max-width: 560px) { .faq { padding-top: 96px; } }
+
+/* ── Privacy (shared nav + footer; a single reading column) ── */
+.page-privacy .policy { max-width: 680px; margin: 0 auto; padding: 140px 0 40px; }
+.policy h1 { margin: 0; font-size: clamp(36px, 5.2vw, 56px); font-weight: 500; line-height: 1; letter-spacing: -0.035em; text-wrap: balance; }
+.policy .updated { margin: 16px 0 40px; font-size: 14px; color: var(--ink-3); }
+.policy h2 { margin: 40px 0 12px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+.policy p { margin: 0 0 16px; font-size: 17px; line-height: 1.6; color: var(--ink-2); }
+.policy strong { color: var(--ink); font-weight: 600; }
+.policy a { color: var(--ink); text-underline-offset: .2em; }
+@media (max-width: 560px) { .page-privacy .policy { padding-top: 110px; } }

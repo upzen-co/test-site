@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
   <title>upzen — tools for better living</title>
-  <meta name="description" content="Health, wealth, happiness, wisdom. upzen builds small, private tools to help you make steady gains in all four." />
+  <meta name="description" content="Simple tools that help you get healthier, spend smarter and feel happier. Each one takes minutes to set up." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
@@ -25,7 +25,7 @@
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://upzen.co/" />
   <meta property="og:title"       content="upzen — tools for better living" />
-  <meta property="og:description" content="Health, wealth, happiness, wisdom. upzen builds small, private tools to help you make steady gains in all four." />
+  <meta property="og:description" content="Simple tools that help you get healthier, spend smarter and feel happier. Each one takes minutes to set up." />
   <meta property="og:image"       content="https://upzen.co/assets/og-image.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
@@ -34,7 +34,7 @@
   <!-- Twitter / X -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="upzen — tools for better living" />
-  <meta name="twitter:description" content="Health, wealth, happiness, wisdom. upzen builds small, private tools to help you make steady gains in all four." />
+  <meta name="twitter:description" content="Simple tools that help you get healthier, spend smarter and feel happier. Each one takes minutes to set up." />
   <meta name="twitter:image"       content="https://upzen.co/assets/og-image.png" />
 
   <link rel="preload" href="/assets/fonts/inter-roman-latin.woff2" as="font" type="font/woff2" crossorigin />
@@ -51,24 +51,23 @@
       <span>upzen</span>
     </a>
     <div class="nav-links">
-      <a href="/charts/">Charts</a>
-      <a href="https://upzen.co/up-bank-wealth-chart/" class="hide-sm">Wealth</a>
-      <a href="#tools" class="hide-sm">Tools</a>
-      <a href="#join" class="nav-cta">Join waitlist</a>
+      <a href="#tools">Tools</a>
+      <a href="/charts/" class="nav-cta">Charts <span class="nav-soon">Soon</span></a>
     </div>
   </nav>
 
   <div class="home-hero-main">
-    <a href="/charts/" class="pill"><span class="pill-badge">Coming soon</span><span>Upzen Charts →</span></a>
+    <a href="/charts/" class="pill"><span class="pill-badge">Beta soon</span><span>Charts for iPhone →</span></a>
     <h1 class="h1">A better life is<br><span class="grad grad-home">closer than<br>you think.</span></h1>
-    <p class="lede">Small, private tools for your <a href="#area-health" class="area-link" style="color:#ff6b6b">health</a>, <a href="#area-wealth" class="area-link" style="color:#6fcf73">wealth</a>, <a href="#area-happiness" class="area-link" style="color:#f5b13d">happiness</a> and <a href="#area-wisdom" class="area-link" style="color:#a78bfa">wisdom</a>.</p>
-    <form id="join" class="waitlist" action="https://app.kit.com/forms/9920214/subscriptions" method="post" novalidate>
+    <p class="lede">Simple tools that help you <a href="#area-health" class="area-link" style="color:#ff6b6b">get healthier</a>, <a href="#area-wealth" class="area-link" style="color:#6fcf73">spend smarter</a> and <a href="#area-happiness" class="area-link" style="color:#f5b13d">feel happier</a>. Each one takes minutes to set up.</p>
+    <form id="join" class="waitlist" data-kit-form="home" data-success="You're on the list. 🎉" action="https://app.kit.com/forms/9920214/subscriptions" method="post" novalidate>
       <div class="waitlist-fields">
         <label for="email-hero" class="sr-only">Email address</label>
         <input id="email-hero" class="waitlist-input" type="email" name="email_address" placeholder="you@example.com" required autocomplete="email" />
         <button type="submit" class="waitlist-btn">Get new tools first</button>
       </div>
       <input type="text" name="hp_website" class="waitlist-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <p class="waitlist-note">One email when something new is ready. Unsubscribe anytime.</p>
       <p class="waitlist-msg" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -78,16 +77,16 @@
       <img src="/assets/charts/hrv-card.png" width="537" height="462"
            alt="A Charts HRV card: 72.8 ms latest against a 49.5 ms average, with a month of readings going up and down before rising today." />
     </a>
-    <div class="float float-wealth mcard" aria-hidden="true">
-      <div class="mcard-head"><span class="mcard-title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 18 L10 11 L14 14 L20 6" stroke="#4cae50" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Net Worth</span><span class="mcard-range">1Y ↗</span></div>
-      <div class="mcard-figs"><div><div class="mcard-val num">$84.2k</div><div class="mcard-sub">Up Bank · today</div></div><div class="mcard-avg num" style="color:#4cae50">+12%<small>this year</small></div></div>
-      <svg class="spark" viewBox="0 0 220 60" style="height:60px"><defs><linearGradient id="nwfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4cae50" stop-opacity="0.35"/><stop offset="1" stop-color="#4cae50" stop-opacity="0"/></linearGradient></defs><path d="M2,48 C20,46 30,44 44,42 S70,40 84,36 S108,38 122,30 S150,26 164,22 S196,16 218,8 L218,60 L2,60 Z" fill="url(#nwfill)"/><path d="M2,48 C20,46 30,44 44,42 S70,40 84,36 S108,38 122,30 S150,26 164,22 S196,16 218,8" fill="none" stroke="#4cae50" stroke-width="2.2" stroke-linecap="round"/><circle cx="218" cy="8" r="3.4" fill="#4cae50"/></svg>
-    </div>
-    <div class="float float-happy mcard" aria-hidden="true">
+    <a href="https://upzen.gumroad.com/l/freetrialtracker" class="float float-wealth mcard" aria-label="Free Trial Tracker, a Notion template">
+      <div class="mcard-head"><span class="mcard-title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="13" r="8" stroke="#4cae50" stroke-width="2.4"/><path d="M12 9v4l2.5 2M9 2h6" stroke="#4cae50" stroke-width="2.4" stroke-linecap="round"/></svg>Free Trials</span><span class="mcard-range">3 active</span></div>
+      <div class="mcard-figs"><div><div class="mcard-val num">2 days</div><div class="mcard-sub">until the next charge</div></div><div class="mcard-avg num" style="color:#4cae50">$0<small>wasted</small></div></div>
+      <div class="mcard-rows"><span class="mcard-row"><span>Streaming</span><b class="num" style="color:#ff6b6b">2d</b></span><span class="mcard-row"><span>Design app</span><b class="num" style="color:#f5b13d">9d</b></span><span class="mcard-row"><span>Music</span><b style="color:#6fcf73">Cancelled ✓</b></span></div>
+    </a>
+    <a href="https://upzen.gumroad.com/l/the-happiness-optimiser" class="float float-happy mcard" aria-label="The Happiness Optimiser, a Notion template">
       <div class="mcard-head"><span class="mcard-title"><svg width="15" height="15" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#f59e0b"/><path d="M8 14c1 1.6 2.4 2.4 4 2.4s3-.8 4-2.4" stroke="#1f1f21" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>Happiness</span><span class="mcard-range">1W ↗</span></div>
       <div class="mcard-figs"><div><div class="mcard-val num">8.1</div><div class="mcard-sub">score · today</div></div><div class="mcard-avg num">6.9<small>avg</small></div></div>
       <svg class="spark" viewBox="0 0 200 54" style="height:54px"><g fill="#f59e0b"><rect x="4" y="22" width="20" height="32" rx="4"/><rect x="32" y="30" width="20" height="24" rx="4"/><rect x="60" y="18" width="20" height="36" rx="4"/><rect x="88" y="34" width="20" height="20" rx="4"/><rect x="116" y="14" width="20" height="40" rx="4"/><rect x="144" y="10" width="20" height="44" rx="4"/><rect x="172" y="4" width="20" height="50" rx="4"/></g></svg>
-    </div>
+    </a>
     <div class="float float-wisdom mcard" aria-hidden="true">
       <div class="mcard-head"><span class="mcard-title"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z" stroke="#8b5cf6" stroke-width="2" stroke-linejoin="round"/></svg>Reading</span><span class="mcard-range">1M →</span></div>
       <div class="mcard-figs"><div><div class="mcard-val num">42</div><div class="mcard-sub">min · today</div></div><div class="mcard-avg num">31<small>avg</small></div></div>
@@ -98,14 +97,7 @@
 
 <main id="tools" class="wrap shelf-section">
   <div class="shelf-head">
-    <h2 class="h2">Everything<br>upzen makes.</h2>
-    <div class="chips" role="group" aria-label="Filter by area">
-      <button type="button" class="chip" data-area="all" aria-pressed="true">All</button>
-      <button type="button" class="chip" data-area="health" aria-pressed="false"><span class="dot" style="background:var(--health)"></span>Health</button>
-      <button type="button" class="chip" data-area="wealth" aria-pressed="false"><span class="dot" style="background:var(--wealth)"></span>Wealth</button>
-      <button type="button" class="chip" data-area="happiness" aria-pressed="false"><span class="dot" style="background:var(--happiness)"></span>Happiness</button>
-      <button type="button" class="chip" data-area="wisdom" aria-pressed="false"><span class="dot" style="background:var(--wisdom)"></span>Wisdom</button>
-    </div>
+    <h2 class="h2">Better,<br>made simple.</h2>
   </div>
 
   <!-- To add a product: add a .pcard to its area and shrink or remove that area's .soon card. -->
@@ -123,10 +115,10 @@
           </div>
         </div>
         <div class="pcard-body">
-          <div class="pcard-meta"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(239,68,68,0.14); color: #f2f2f2"><span style="width: 7px; height: 7px; border-radius: 99px; background: #ef4444"></span>Health</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">iOS app</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Coming soon</span></div>
+          <div class="pcard-meta"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(239,68,68,0.14); color: #f2f2f2"><span style="width: 7px; height: 7px; border-radius: 99px; background: #ef4444"></span>Health</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">iOS app</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Beta soon</span></div>
           <div class="pcard-name" style="font-size:26px">Charts</div>
-          <div class="pcard-desc">Choose the health data you care about, see it at a glance, and get an alert the moment it changes.</div>
-          <div class="pcard-cta">Explore Charts →</div>
+          <div class="pcard-desc">The health numbers you care about, at a glance. And an alert the moment one changes.</div>
+          <div class="pcard-cta">Get early access →</div>
         </div>
       </a>
       <a class="pcard" href="https://upzen.gumroad.com/l/apple-watch-cheatsheet">
@@ -144,7 +136,7 @@
         <div class="pcard-body">
           <div class="pcard-meta"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(239,68,68,0.14); color: #f2f2f2"><span style="width: 7px; height: 7px; border-radius: 99px; background: #ef4444"></span>Health</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">PDF</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Free</span></div>
           <div class="pcard-name">Apple Watch Heart Health Cheatsheet</div>
-          <div class="pcard-desc">17 metrics that reveal your cardiovascular risk, with target ranges and red zones.</div>
+          <div class="pcard-desc">The 17 Apple Watch numbers that matter for your heart. What's healthy, and what isn't.</div>
           <div class="pcard-cta">Get it free →</div>
         </div>
       </a>
@@ -152,20 +144,8 @@
   </section>
 
   <section class="area" id="area-wealth" data-area="wealth" aria-labelledby="h-wealth">
-    <div class="area-head"><h3 id="h-wealth"><span class="dot" style="background:var(--wealth)"></span>Wealth</h3><span>Grow it, keep it, understand it.</span></div>
+    <div class="area-head"><h3 id="h-wealth"><span class="dot" style="background:var(--wealth)"></span>Wealth</h3><span>Spend less. Keep more.</span></div>
     <div class="shelf">
-      <a class="pcard" href="https://upzen.co/up-bank-wealth-chart/">
-        <div class="pcard-art" aria-hidden="true">
-          <svg viewBox="0 0 360 200" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%"><defs><linearGradient id="fb-up" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4cae50" stop-opacity="0.35"/><stop offset="1" stop-color="#4cae50" stop-opacity="0"/></linearGradient></defs><path d="M0,170 C40,166 70,160 100,150 S160,146 190,126 S250,110 280,84 S330,60 360,40 L360,200 L0,200 Z" fill="url(#fb-up)"/><path d="M0,170 C40,166 70,160 100,150 S160,146 190,126 S250,110 280,84 S330,60 360,40" fill="none" stroke="#4cae50" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
-          <div class="num" style="position:absolute; left:24px; top:22px; font-size:32px; font-weight:700">$84.2k <span style="font-size:15px; color:#4cae50">+12%</span></div>
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-meta"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(76,174,80,0.15); color: #f2f2f2"><span style="width: 7px; height: 7px; border-radius: 99px; background: #4cae50"></span>Wealth</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Tool</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Free</span></div>
-          <div class="pcard-name">Up Bank Wealth Chart</div>
-          <div class="pcard-desc">One number, tracked over time. See which way your wealth is moving.</div>
-          <div class="pcard-cta">Open chart →</div>
-        </div>
-      </a>
       <a class="pcard" href="https://upzen.gumroad.com/l/freetrialtracker">
         <div class="pcard-art" style="display:flex; flex-direction:column; justify-content:center; gap:10px; padding:0 24px" aria-hidden="true">
           <div style="display:flex; justify-content:space-between; gap:8px; background:var(--card); border-radius:14px; padding:12px 14px; font-size:14px"><span>Streaming trial</span><span class="num" style="color:#ff6b6b; font-weight:700; white-space:nowrap">2 days left</span></div>
@@ -175,11 +155,12 @@
         <div class="pcard-body">
           <div class="pcard-meta"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(76,174,80,0.15); color: #f2f2f2"><span style="width: 7px; height: 7px; border-radius: 99px; background: #4cae50"></span>Wealth</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Notion</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">$5</span></div>
           <div class="pcard-name">Free Trial Tracker</div>
-          <div class="pcard-desc">Countdowns, calendar view and cancellation reminders, all in Notion.</div>
+          <div class="pcard-proof"><span aria-hidden="true">★</span> 4.9 · 26 ratings on Gumroad</div>
+          <div class="pcard-desc">Never pay for a trial you forgot to cancel. Countdowns and reminders, right in Notion.</div>
           <div class="pcard-cta">Get the template →</div>
         </div>
       </a>
-      <a class="pcard" href="https://upzen.gumroad.com/l/purchase-pal">
+      <a class="pcard span-2" href="https://upzen.gumroad.com/l/purchase-pal">
         <div class="pcard-art" style="display:flex; align-items:center; justify-content:center; padding:0 24px" aria-hidden="true">
           <div style="background:rgba(40,40,44,0.9); border-radius:18px; padding:14px 16px; width:100%; max-width:260px; box-shadow:0 16px 36px rgba(0,0,0,0.45)">
             <div style="font-size:12px; color:rgba(255,255,255,0.5)">Question 3 of 10</div>
@@ -190,7 +171,7 @@
         <div class="pcard-body">
           <div class="pcard-meta"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(76,174,80,0.15); color: #f2f2f2"><span style="width: 7px; height: 7px; border-radius: 99px; background: #4cae50"></span>Wealth</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Shortcut</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Free</span></div>
           <div class="pcard-name">Purchase Pal</div>
-          <div class="pcard-desc">10 smart questions before any purchase. Cuts impulse buys before they happen.</div>
+          <div class="pcard-desc">Ten quick questions before you buy. Skip the purchases you'd regret.</div>
           <div class="pcard-cta">Get it free →</div>
         </div>
       </a>
@@ -198,7 +179,7 @@
   </section>
 
   <section class="area" id="area-happiness" data-area="happiness" aria-labelledby="h-happiness">
-    <div class="area-head"><h3 id="h-happiness"><span class="dot" style="background:var(--happiness)"></span>Happiness</h3><span>More of what matters, less of what doesn't.</span></div>
+    <div class="area-head"><h3 id="h-happiness"><span class="dot" style="background:var(--happiness)"></span>Happiness</h3><span>Do more of what makes you happy.</span></div>
     <div class="shelf">
       <a class="pcard" href="https://upzen.gumroad.com/l/the-happiness-optimiser">
         <div class="pcard-art" style="display:flex; align-items:flex-end; justify-content:center; gap:10px; padding:0 24px 28px" aria-hidden="true">
@@ -207,11 +188,12 @@
         <div class="pcard-body">
           <div class="pcard-meta"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(245,158,11,0.15); color: #f2f2f2"><span style="width: 7px; height: 7px; border-radius: 99px; background: #f59e0b"></span>Happiness</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">Notion</span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; line-height: 1; white-space: nowrap; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.75)">$19</span></div>
           <div class="pcard-name">The Happiness Optimiser</div>
-          <div class="pcard-desc">Tracks which activities actually make you happy. Scores, memories and a scheduler.</div>
+          <div class="pcard-proof"><span aria-hidden="true">★</span> 5.0 · 21 ratings on Gumroad</div>
+          <div class="pcard-desc">Find out what really makes you happy. Then do more of it.</div>
           <div class="pcard-cta">Get the template →</div>
         </div>
       </a>
-      <a class="soon" href="#join">
+      <a class="soon" href="#subscribe">
         <span class="soon-badge"><span class="dot" style="background:var(--happiness)"></span>Get notified</span>
         <span class="soon-title">Want to hear about new tools?</span>
         <span class="soon-sub">One email when something new is ready →</span>
@@ -219,20 +201,21 @@
     </div>
   </section>
 
-  <section class="area" id="area-wisdom" data-area="wisdom" aria-labelledby="h-wisdom">
-    <div class="area-head"><h3 id="h-wisdom"><span class="dot" style="background:var(--wisdom)"></span>Wisdom</h3><span>Keep learning, keep growing.</span></div>
-    <div class="shelf">
-      <a class="soon soon-full" href="#join">
-        <span class="soon-badge"><span class="dot" style="background:var(--wisdom)"></span>Get notified</span>
-        <span class="soon-title">Want to hear about new tools?</span>
-        <span class="soon-sub">One email when something new is ready →</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="about">
+  <section id="subscribe" class="about">
     <h2 class="h2" style="font-size:clamp(36px, 4.6vw, 52px); line-height:1"><span style="color:var(--health)">Health.</span> <span style="color:var(--wealth)">Wealth.</span><br><span style="color:var(--happiness)">Happiness.</span> <span style="color:var(--wisdom)">Wisdom.</span></h2>
-    <p>Most people work hard on one thing and let the others drift. upzen makes it easy to make steady gains in all four.</p>
+    <div class="about-copy">
+      <p>Most of us pour everything into one and let the others slide. upzen makes it easy to keep all four moving up.</p>
+      <form class="waitlist" data-kit-form="home" data-success="You're on the list. 🎉" action="https://app.kit.com/forms/9920214/subscriptions" method="post" novalidate>
+        <div class="waitlist-fields">
+          <label for="email-end" class="sr-only">Email address</label>
+          <input id="email-end" class="waitlist-input" type="email" name="email_address" placeholder="you@example.com" required autocomplete="email" />
+          <button type="submit" class="waitlist-btn">Get new tools first</button>
+        </div>
+        <input type="text" name="hp_website" class="waitlist-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <p class="waitlist-note">One email when something new is ready. Unsubscribe anytime.</p>
+        <p class="waitlist-msg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </section>
 
   <footer class="footer">

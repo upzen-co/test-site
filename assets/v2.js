@@ -1,5 +1,9 @@
-// upzen v2 — waitlist forms, shelf filters, live chart dates.
+// upzen v2 — waitlist forms, live chart dates, nav + scroll motion.
 (function () {
+  // One Kit form per page, so Kit's per-form subscriber counts show which page converts.
+  // Forms name their page with data-kit-form; set each page's Kit form ID here (the markup action is the no-JS fallback).
+  var KIT_FORMS = { home: '9920214', charts: '10081023' };
+
   // ── Waitlist forms → Kit (ConvertKit). Every .waitlist form on the page posts the same way. ──
   document.querySelectorAll('form.waitlist').forEach(function (form) {
     var fields = form.querySelector('.waitlist-fields');
@@ -27,7 +31,11 @@
       // URL-encoded (not multipart) — Kit's endpoint parses this reliably.
       var body = new URLSearchParams();
       body.append('email_address', emailEl.value.trim());
-      fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: body })
+      // Kit stores the referrer on the subscriber, which also tells hero signups from end-of-page ones.
+      body.append('referrer', location.href.split('#')[0] + '#' + (form.id || emailEl.id));
+      var kitId = KIT_FORMS[form.getAttribute('data-kit-form')];
+      var url = kitId ? 'https://app.kit.com/forms/' + kitId + '/subscriptions' : form.action;
+      fetch(url, { method: 'POST', headers: { 'Accept': 'application/json' }, body: body })
         .then(function (r) {
           return r.text().then(function (t) {
             var data = null;
@@ -40,7 +48,10 @@
           var errored = res.data && (res.data.error || res.data.errors);
           if (res.ok && !errored) {
             if (fields) fields.hidden = true;
-            showMsg("You're on the list. Check your inbox to confirm your spot. 🎉", 'success');
+            var note = form.querySelector('.waitlist-note');
+            if (note) note.hidden = true;
+            // Single opt-in: no confirmation email to wait for, so the form says so in its own words (data-success).
+            showMsg(form.getAttribute('data-success') || "You're on the list. 🎉", 'success');
           } else {
             var apiMsg = res.data && (res.data.message || res.data.error || (res.data.errors && res.data.errors[0]));
             showMsg(apiMsg || 'Hmm, that didn’t go through. Please try again.', 'error');
@@ -50,18 +61,6 @@
           btn.disabled = false;
           showMsg('Network error — please check your connection and try again.', 'error');
         });
-    });
-  });
-
-  // ── Shelf filters: show one area or all. ──
-  var chips = document.querySelectorAll('.chip[data-area]');
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      var area = chip.getAttribute('data-area');
-      chips.forEach(function (c) { c.setAttribute('aria-pressed', c === chip ? 'true' : 'false'); });
-      document.querySelectorAll('.area[data-area]').forEach(function (el) {
-        el.hidden = !(area === 'all' || el.getAttribute('data-area') === area);
-      });
     });
   });
 
@@ -77,5 +76,26 @@
       s.textContent = fmt.format(d);
       dates.appendChild(s);
     });
+  }
+
+  // ── Nav frosts once the page scrolls under it. ──
+  var nav = document.querySelector('.nav');
+  if (nav) {
+    var onScroll = function () { nav.classList.toggle('stuck', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // ── Scroll reveals: blocks rise in once as they enter view. Skipped entirely for reduced motion. ──
+  var reveals = document.querySelectorAll('[data-reveal]');
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reveals.length && !calm && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('anim');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
   }
 })();
